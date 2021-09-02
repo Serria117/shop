@@ -52,22 +52,9 @@
                             <td><b id='total1'><?= isset($_SESSION['total']) ? number_format($_SESSION['total']) : 0 ?></b></td>
                             <td></td>
                         </tr>
-                        <tr>
-                            <td colspan="3">Phí vận chuyển:</td>
-                            <td id='ship'>30,000</td>
-                            <td></td>
-                        </tr>
-                        <tr style="background-color: #dbdbdb;">
-                            <td colspan="3"><b>Tổng thanh toán: </b></td>
-                            <td>
-                                <b id='total2'><?= isset($_SESSION['total']) && $_SESSION['total'] > 0 ? number_format($_SESSION['total'] + 30000) : 0 ?></b>
-                            </td>
-                            <td></td>
-                        </tr>
                     </tfoot>
                 </table>
             <?php } ?>
-
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-4">
