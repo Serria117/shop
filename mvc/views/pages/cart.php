@@ -7,7 +7,7 @@
                 <script>
                 setTimeout(function(){
                     window.location.href = '../home';
-                 }, 5000);
+                 }, 7000);
                 </script>
             <?php } else { ?>
                 <span>
@@ -54,6 +54,7 @@
                         </tr>
                     </tfoot>
                 </table>
+                <p>(*)<i>Giá chưa bao gồm phí vận chuyển.</i></p>
             <?php } ?>
         </div>
         <div class="col-md-1"></div>

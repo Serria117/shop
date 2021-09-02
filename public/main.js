@@ -63,12 +63,7 @@ $(document).ready(function () {
         var total = parseFloat($("#total1").html().replace(/,/g, ""));
         total -= sub;
         $("#total1").html(total.toLocaleString());
-        // if (total > 0) {
-        //     $("#total2").html((total + parseInt($("#ship").html().replace(/,/g, ""))).toLocaleString());
-        // } else {
-        //     $("#total2").html(total.toLocaleString());
-        // }
-        // item.remove();
+        item.remove();
         $.post("/shop/ajax/updatecart", {
             removeID: id
         });
