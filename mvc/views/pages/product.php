@@ -28,8 +28,8 @@
 </div>
 <br>
 <?php 
-print_r($_SESSION['cart']);
-echo "<br>";
-echo "Total = "; print_r($_SESSION['total']);
+// print_r($_SESSION['cart']);
+// echo "<br>";
+// echo "Total = "; print_r($_SESSION['total']);
 // unset($_SESSION['cart']);
 ?>

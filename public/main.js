@@ -13,7 +13,7 @@ $(document).ready(function () {
         // alert ("id="+id + " -- qtt=" + qtt);
         $.ajax({
             type: "post",
-            url: "/shop/ajax/addcart",
+            url: "./ajax/addcart",
             data: {
                 id: id,
                 qtt: qttVal
@@ -43,10 +43,10 @@ $(document).ready(function () {
             total += parseInt($(this).html().replace(/,/g, ""));
         })
         $("#total1").html(total.toLocaleString());
-        $("#total2").html((total + parseInt($("#ship").html().replace(/,/g, ""))).toLocaleString());
-
+          
         $.post(
-            "/shop/ajax/updatecart", {
+            "./ajax/updatecart", 
+            {
                 updateID: id,
                 updateQtt: $(this).val(),
                 updateSub: newSub,
@@ -63,8 +63,7 @@ $(document).ready(function () {
         var total = parseFloat($("#total1").html().replace(/,/g, ""));
         total -= sub;
         $("#total1").html(total.toLocaleString());
-        item.remove();
-        $.post("/shop/ajax/updatecart", {
+        $.post("./ajax/updatecart", {
             removeID: id
         });
     })
@@ -78,7 +77,7 @@ $(document).ready(function () {
 
     $('#dienThoai').keyup(function () {
         $.post(
-            "/shop/ajax/checkuser", {
+            "./ajax/checkuser", {
                 phone: $(this).val(),
             },
             function (json) {
