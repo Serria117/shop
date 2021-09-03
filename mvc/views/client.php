@@ -35,7 +35,8 @@
 </head>
 
 <body class="u-body" style="min-height: 100vh; position:relative">
-  <header class="u-clearfix u-header u-palette-3-base u-header" id="sec-f6f1"><a href="#" class="u-image u-logo u-image-1" src="">
+  <header class="u-clearfix u-header u-palette-3-base u-header" id="sec-f6f1">
+    <a href="./" class="u-image u-logo u-image-1" src="">
       <img src="/shop/public/images/f4d4da86ac71e8f618a6a46621ce6d05.png" class="u-logo-image u-logo-image-1">
     </a>
     <nav class="u-align-left u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="MD">

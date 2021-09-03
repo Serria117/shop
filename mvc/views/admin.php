@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- Material Kit CSS -->
     <link href="/shop/public/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+    <link href="/shop/public/assets/css/sidebar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -23,23 +27,20 @@
       Tip 2: you can also add an image using data-image tag
   -->
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                <a href="./admin" class="simple-text logo-mini">
                     Trang quản trị
-                </a>
-                <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                    
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="nav-item active  ">
-                        <a class="nav-link" href="#0">
+                        <a class="nav-link" href="/shop/admin">
                             <i class="material-icons">dashboard</i>
                             <p>Trang chủ</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#0">
+                        <a class="nav-link" href="/shop/admin/product">
                             <i class="fa fa-product-hunt" aria-hidden="true"></i>
                             <p>Sản phẩm</p>
                         </a>
@@ -47,6 +48,13 @@
                     <!-- your sidebar here -->
                 </ul>
             </div>
+        </div>
+        <div id="mySidebar" class="sidebar1">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Clients</a>
+            <a href="#">Contact</a>
         </div>
         <div class="main-panel">
             <!-- Navbar -->

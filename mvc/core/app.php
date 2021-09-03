@@ -6,21 +6,30 @@ class app
     protected $action = 'default';
     protected $params = [];
 
+    /*Xử lý URL: URL người dùng nhập vào dưới dạng domain/controller/action/parameter 
+    sẽ được phân tách để lấy các giá trị của controller, action và param: 
+    */
+    function urlProcess()
+    { 
+        if (isset($_GET['url'])) {
+            return explode('/', filter_var(trim(strtolower($_GET['url']), '/')));
+        }
+    }
+
     function __construct()
     {
-        $arr = $this->urlProcess();
-        if (empty($arr)) {
+        $arr = $this->urlProcess(); #các giá trị của controller, action, param được lưu trong 1 array để thao tác
+        if (empty($arr)) { #nếu array rỗng thì set controller mặc định là home
             $this->controller = 'home';
-        } else {
+        } else { #phần tử đầu tiên trong array là tên controller, nếu tồn tại file php chứa class controller tương ứng thì set controller = tên controller tìm thấy
             if (file_exists("./mvc/controllers/" . $arr[0] . ".php")) {
                 $this->controller = $arr[0];
                 unset($arr[0]);
             }
         }
-        //Process controller:
-
-        require_once "./mvc/controllers/" . $this->controller . ".php"; //load the controller file bases on its name
+        require_once "./mvc/controllers/" . $this->controller . ".php"; //load controller file
         $this->controller = new $this->controller;
+        
         //Process action:
         if (isset($arr[1])) {
             if (method_exists($this->controller, $arr[1])) {
@@ -36,10 +45,5 @@ class app
         call_user_func_array([$this->controller, $this->action], $this->params);
     }
 
-    function urlProcess()
-    { //the URL will be take a part and store in an array: [0]=>controller, [1]=>action and the later elements are the params
-        if (isset($_GET['url'])) {
-            return explode('/', filter_var(trim(strtolower($_GET['url']), '/')));
-        }
-    }
+    
 }

@@ -19,7 +19,8 @@ class admin extends controller {
     public function product(){
         $this->view("admin", [
             'title' => 'Quản lý sản phẩm',
-            'page' => 'adminproduct'
+            'page' => 'adminproduct',
+            'table' => $this->product->danhSachSP()
         ]);
     }
 }

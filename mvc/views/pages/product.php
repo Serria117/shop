@@ -5,7 +5,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-xm-12 text-center" style="padding-bottom: 10px; text-align:center;">
                 <div>
                     <a class='link-product' href="/shop/product/detail/<?=$sp['id']?>/<?=$sp['url']?>">
-                    <img style="width:100%; height: 250px; border:1px solid gray; border-radius:15px" src="/shop/public/images/sanpham/<?= $sp['img'] ?>" alt="" srcset="">
+                    <img style="width:100%; height: 250px; border-radius:10px" src="/shop/public/images/sanpham/<?= $sp['img'] ?>" alt="" srcset="">
                     </a>
                 </div>
                 <div style="text-align: center;">
