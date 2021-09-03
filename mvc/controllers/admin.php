@@ -15,4 +15,11 @@ class admin extends controller {
             'table' => $this->admin->orderList()
         ]);
     }
+
+    public function product(){
+        $this->view("admin", [
+            'title' => 'Quản lý sản phẩm',
+            'page' => 'adminproduct'
+        ]);
+    }
 }

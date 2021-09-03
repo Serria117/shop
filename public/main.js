@@ -63,6 +63,7 @@ $(document).ready(function () {
         var total = parseFloat($("#total1").html().replace(/,/g, ""));
         total -= sub;
         $("#total1").html(total.toLocaleString());
+        item.remove();
         $.post("./ajax/updatecart", {
             removeID: id
         });
