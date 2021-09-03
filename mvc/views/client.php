@@ -7,6 +7,8 @@
   <meta name="keywords" content="Menu">
   <meta name="description" content="">
   <meta name="page_type" content="np-template-header-footer-from-plugin">
+  <link rel="shortcut icon" href="/shop/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/shop/favicon.ico" type="image/x-icon">
   <title><?= isset($data['title']) ? $data['title'] : 'Home' ?></title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="/shop/public/nicepage.css" media="screen">
@@ -36,7 +38,7 @@
 
 <body class="u-body" style="min-height: 100vh; position:relative">
   <header class="u-clearfix u-header u-palette-3-base u-header" id="sec-f6f1">
-    <a href="./" class="u-image u-logo u-image-1" src="">
+    <a href="/shop/" class="u-image u-logo u-image-1" src="">
       <img src="/shop/public/images/f4d4da86ac71e8f618a6a46621ce6d05.png" class="u-logo-image u-logo-image-1">
     </a>
     <nav class="u-align-left u-menu u-menu-dropdown u-offcanvas u-menu-1" data-responsive-from="MD">
@@ -79,7 +81,7 @@
           <li class="u-nav-item"><a class="u-button-style u-nav-link" href="/shop/contact" style="padding: 8px 0px;">Liên hệ</a>
           </li>
           <li class="u-nav-item">
-          <a class="u-button-style u-nav-link" href="/shop/cart" style="padding: 8px 0px;"><span style="font-size: x-large; color:red"><i class="fas fa-cart-arrow-down"></i></span></a>
+            <a class="u-button-style u-nav-link" href="/shop/cart" style="padding: 8px 0px;"><span style="font-size: x-large; color:red"><i class="fas fa-cart-arrow-down"></i></span></a>
           </li>
         </ul>
       </div>

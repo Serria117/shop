@@ -9,7 +9,6 @@
                 <th>Trạng thái</th>
                 <th>Ngày đặt hàng</th>
                 <th>Ngày cập nhật</th>
-                <th>Xử lý</th>
             </tr>
         </thead>
         <tbody>
@@ -22,11 +21,10 @@
                     <td><?= $stt ?></td>
                     <td scope="row"><?= $item['tenKH'] ?></td>
                     <td><?= $item['dienThoai'] ?></td>
-                    <td><?= number_format($item['giaTri']) ?></td>
-                    <td><?= $item['status'] ?></td>
+                    <td> <?= number_format($item['giaTri']) ?> </td>
+                    <td><button class="btn btn-primary"><?= $item['status'] ?></button></td>
                     <td><?= $createDate ?></td>
                     <td><?= $updateDate ?></td>
-                    <td><button class="btn btn-primary"><i class="fa fa-check-square-o" aria-hidden="true"></i></button></td>
                 </tr>
             <?php $stt++;
             endforeach; ?>

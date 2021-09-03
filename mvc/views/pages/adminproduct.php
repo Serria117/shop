@@ -3,7 +3,7 @@
         <button class="btn btn-danger">Thêm sản phẩm</button>
         <button class="btn btn-primary">Nhập hàng</button>
     </div>
-    <table class="table table-striped">
+    <table class="table table-hover">
             <tr>
                 <th>STT</th>
                 <th>Sản phẩm</th>
