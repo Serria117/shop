@@ -15,7 +15,7 @@ class product extends controller {
         
     }
 
-    public function detail($id){
+    public function detail($id){ #shop/product/detail
         $this->view("client", [
             'title' => 'Chi tiết sản phẩm',
             'page' => 'productdetail',

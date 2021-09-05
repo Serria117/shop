@@ -4,10 +4,12 @@ class ajax extends controller
 {
     public $product;
     public $user;
+    public $admin;
     public function __construct()
     {
         $this->product = $this->model("productModel");
         $this->user = $this->model("userModel");
+        $this->admin = $this->model("adminModel");
     }
 
     public function addCart()
@@ -58,6 +60,13 @@ class ajax extends controller
         if(isset($_POST['phone'])){
             $dienThoai = $_POST['phone'];
             $json = $this->user->checkuser($dienThoai);
+            echo $json;
+        }
+    }
+    public function hienThiDon(){
+        if(isset($_POST['id'])){
+            $id = $_POST['id'];
+            $json = $this->admin->hienThiDonHang($id);
             echo $json;
         }
     }

@@ -9,6 +9,13 @@ class productModel extends DB
         return $table;
     }
 
+    public function danhSachLoaiSP(){
+        $sql = "SELECT * FROM loaisp";
+        $query = $this->con->query($sql);
+        $table = $query->fetch_all(MYSQLI_ASSOC);
+        return $table;
+    }
+
     public function chitietSP($id)
     {
         $sql = "SELECT * FROM sanpham WHERE id = ?";
@@ -59,7 +66,7 @@ class productModel extends DB
                     dienThoai = '$dienThoai',
                     yeuCau = '$yeuCau',
                     thanhToan = '$thanhToan',
-                    phiShip = $phiShip
+                    phiShip = '$phiShip'
                 ";
         if ($this->con->query($sql)) {
             $idDH = $this->con->insert_id;
@@ -76,5 +83,15 @@ class productModel extends DB
         unset($_SESSION['cart']);
         $_SESSION['cart'] = [];
         $_SESSION['total'] = 0;
+    }
+
+    public function themSP($tenSP, $donGia, $donVi, $loai, $url, $img){
+        $sql = "INSERT INTO sanpham 
+        SET tenSP = ?, url = ?, donGia = ?, donVi = ?, loaiID = ?, url = ?, img = ?
+        ";
+        $stm = $this->con->prepare($sql);
+        $stm->bind_param("ssisiss",$tenSP, $donGia, $donVi, $loai, $url, $img);
+        $stm->execute();
+
     }
 }
