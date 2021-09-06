@@ -1,4 +1,14 @@
 <div>
+    <div class="container">
+        <form action="/shop/admin/timkiem" method="POST">
+            <div class="input-group mb-3">
+                <input name="search-order" style="max-width:30%;" type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Tìm kiếm" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" name="submit" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -81,7 +91,7 @@
                     </div><br>
                     <form action="/shop/admin/updateorder" method="post">
                         <div class="container">
-                            <input type="hidden" name="id"  value="">
+                            <input type="hidden" name="id" value="">
                             <div class="btn-group" data-bs-toggle="buttons">
                                 <label class="btn btn-warning"> Chưa xử lý
                                     <input type="radio" class="me-2 radio-trangthai" name="trangthai" id="" autocomplete="off" value='0'>

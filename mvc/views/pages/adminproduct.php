@@ -1,16 +1,16 @@
-
 <div class="container-fluid">
     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#add-sp">Thêm sản phẩm</button>
-    <button class="btn btn-primary">Nhập hàng</button>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nhapHang">Nhập hàng</button>
 
     <table style="table-layout: fixed;" class="table table-hover">
         <tr>
             <th style="width:5%">STT</th>
             <th>Sản phẩm</th>
             <th>Giá bán</th>
-            <th>Tồn kho</th>
             <th>Đã bán</th>
-            <th>Quản lý</th>
+            <th>Tồn kho</th>
+            <th>Ngày tạo</th>
+            <th>Ngày cập nhật</th>
         </tr>
         </thead>
         <tbody>
@@ -18,16 +18,17 @@
             $stt = 1;
             foreach ($data['table'] as $sp) :
             ?>
-                <tr data-bs-toggle="modal" data-bs-target="#edit-sp" data-id="<?= $sp['id'] ?>">
+                <tr class='chitietsp' data-bs-toggle="modal" data-bs-target="#edit-sp" data-id="<?= $sp['id'] ?>">
                     <td scope="row"><?= $stt ?></td>
                     <td>
-                        <img style="width:100px" src="/shop/public/images/sanpham/<?=$sp['img']?>" alt="">
-                        <?= $sp['tenSP'] ?>
+                        <img style="width:100px" src="/shop/public/images/sanpham/<?= $sp['img'] ?>" alt="">
+                        <p><?= $sp['tenSP'] ?></p>
                     </td>
                     <td><?= $sp['donGia'] ?></td>
-                    <td></td>
-                    <td></td>
-                    <td><button class='btn btn-success' data-bs-toggle="modal" data-bs-target="#edit-sp"><i class="far fa-edit"></i></button></td>
+                    <td><?= $sp['daBan'] ?></td>
+                    <td><?= $sp['tonKho'] ?></td>
+                    <td><?= $sp['created_on']  ?></td>
+                    <td><?= $sp['updated_on']  ?></td>
                 </tr>
             <?php
                 $stt++;
@@ -36,10 +37,10 @@
         </tbody>
     </table>
 
-    <!-- Modal -->
+    <!-- Thêm sản phẩm -->
     <div class="modal fade" id="add-sp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="/shop/admin/themsp" method="post" enctype="multipart/form-data">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Thêm sản phẩm</h5>
@@ -81,11 +82,11 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Ảnh đại diện</label>
-                                <input type="file" class="form-control" name="img" id="img" placeholder="" aria-describedby="imgHelp" required>
-                                <small id="imgHelp" class="form-text text-muted">*Chấp nhận ảnh jpg, png hoặc gif dung lượng không quá 5MB.</small>
-                            </div>
+
+                            <label for="" class="form-label">Ảnh đại diện</label>
+                            <input type="file" class="form-control" name="img" id="img" placeholder="" aria-describedby="imgHelp" required accept=".jpg, .png, .gif">
+                            <small id="imgHelp" class="form-text text-muted">*Chấp nhận ảnh jpg, png hoặc gif dung lượng không quá 5MB.</small>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -98,16 +99,97 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Quản lý sản phẩm -->
 <div class="modal fade" id="edit-sp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <form action="/shop/admin/admin_updatesp" method="post">>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quản lý sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="update-name" class="form-label">Tên sản phẩm:</label>
+                                <input type="text" class="form-control" name="update-name" id="update-name" aria-describedby="help-update-name " placeholder="">
+                                <small id="help-update-name" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="update-loai" class="form-label">Loại sản phẩm:</label>
+                                <select class="form-control" name="update-loai" id="update-loai">
+                                    <option value="0">Chọn:</option>
+                                    <?php foreach ($data['loaisp'] as $loai) : ?>
+                                        <option value="<?= $loai['id'] ?>"><?= $loai['tenLoai'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="update-giaban" class="form-label">Giá bán:</label>
+                                <input type="text" class="form-control" name="update-giaban" id="update-giaban" aria-describedby="help-update-giaban" placeholder="">
+                                <small id="help-update-giaban" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label for="" class="form-label">Ảnh đại diện:</label>
+                            <input type="file" class="form-control" name="img" id="img" placeholder="" aria-describedby="imgHelp" required accept=".jpg, .png, .gif">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="update-mota" class="form-label">Cập nhật mô tả:</label>
+                                <textarea class="form-control" name="update-mota" id="update-mota" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Nhập hàng -->
+<div class="modal fade" id="nhapHang" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Nhập hàng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Body
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Số lượng nhập</th>
+                            <th>Giá nhập</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($data['table'] as $sp) : ?>
+                            <tr>
+                                <td scope="row"><?= $sp['tenSP'] ?></td>
+                                <td>
+                                    <input style="width:100px" type="number" min='0' value='0' step='any' class="form-control" name="" id="">
+                                </td>
+                                <td><input style="width:100px" type="number" step='500' class="form-control" name="" id="" aria-describedby="helpId" placeholder=""></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -115,7 +197,4 @@
             </div>
         </div>
     </div>
-</div>
-
-
 </div>

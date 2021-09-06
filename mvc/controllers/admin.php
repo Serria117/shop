@@ -38,7 +38,25 @@ class admin extends controller
             $this->view("admin", [
                 'title' => 'Quản lý bán hàng',
                 'page' => 'adminhome',
-                'table' => $this->admin->orderList(),
+                'table' => $this->admin->orderList(""),
+                'user' => $_SESSION['admin']
+            ]);
+        } else {
+            header("location: /shop/admin/login");
+        }
+    }
+
+    public function timkiem()
+    {
+        if (isset($_SESSION['admin'])) {
+            $search = '';
+            if(isset($_POST['search-order'])){
+                $search = $_POST['search-order'];
+            }
+            $this->view("admin", [
+                'title' => 'Quản lý bán hàng',
+                'page' => 'adminhome',
+                'table' => $this->admin->orderList($search),
                 'user' => $_SESSION['admin']
             ]);
         } else {
@@ -52,7 +70,7 @@ class admin extends controller
             $this->view("admin", [
                 'title' => 'Quản lý sản phẩm',
                 'page' => 'adminproduct',
-                'table' => $this->product->danhSachSP(),
+                'table' => $this->admin->danhSachSP(),
                 'loaisp' => $this->product->danhSachLoaiSP(),
                 'user' => $_SESSION['admin']
             ]);
@@ -60,6 +78,7 @@ class admin extends controller
             header("location: /shop/admin/login");
         }
     }
+
 
     public function updateOrder()
     {
@@ -72,7 +91,7 @@ class admin extends controller
             $this->view("admin", [
                 'title' => 'Quản lý bán hàng',
                 'page' => 'adminhome',
-                'table' => $this->admin->orderList(),
+                'table' => $this->admin->orderList(""),
                 'user' => $_SESSION['admin']
             ]);
         } else {
@@ -80,14 +99,52 @@ class admin extends controller
         }
     }
 
-    public function themSP(){
+    public function themSP()
+    {
         if (isset($_SESSION['admin'])) {
-            if(isset($_POST['add'])){
+            if (isset($_POST['add'])) {
+                $tenSP = $_POST['name'];
+                $loaiSP = $_POST['loai'];
+                $moTa = $_POST['mota'];
+                $donGia = $_POST['donGia'];
+                $donVi = $_POST['donVi'];
 
+                //Xử lý file ảnh upload:
+                $checkUpload =[];
+                $folder = './public/images/sanpham/';
+                $file = $_FILES['img'];
+                $findExt = explode('.', $file['name']);
+                $fileExt = strtolower(end($findExt));
+                $allowExt = ['jpg', 'png', 'gif'];
+                if($file['size']>5242880){
+                    $checkUpload['size'] = 'File size must be less than 5MB!';
+                }
+                if(!in_array($fileExt, $allowExt)){
+                    $checkUpload['type'] = 'Invalid image format.';
+                }
+                if(count($checkUpload)!=0){
+                    print_r($checkUpload);
+                    exit();
+                } else {
+                    $fileName = uniqid().$file['name'];
+                    move_uploaded_file($file['tmp_name'], $folder.$fileName);
+                    $img = $fileName;
+                }
+                
+                $result = $this->product->themSP($tenSP, $donGia, $donVi, $loaiSP, $img, $moTa);
+                if($result === false){
+                    echo "False"; exit;
+                } else {
+                    header ("location: /shop/admin/product");
+                }
             }
-
         } else {
             header("location: /shop/admin/login");
         }
     }
+
+    public function admin_updateSP(){
+        
+    }
+
 }

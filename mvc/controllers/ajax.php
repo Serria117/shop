@@ -70,4 +70,12 @@ class ajax extends controller
             echo $json;
         }
     }
+
+    public function admin_hienThiSP(){
+        if(isset($_POST['hienthiSP'])){
+            $id = $_POST['hienthiSP'];
+            $json = $this->admin->chiTietSP($id);
+            echo $json;
+        }
+    }
 }

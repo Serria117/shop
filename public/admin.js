@@ -5,11 +5,11 @@ $(document).ready(function () {
 
     setStatusColor();
 
-    function setStatusColor(){
+    function setStatusColor() {
         var button = document.querySelectorAll('.xuly');
-        $.each(button, function(){
+        $.each(button, function () {
             var value = $(this).attr('data-value');
-            switch(value){
+            switch (value) {
                 case '0':
                     $(this).toggleClass('btn-warning');
                     break;
@@ -24,7 +24,7 @@ $(document).ready(function () {
                     break;
             }
         })
-        
+
     }
 
     $('.xuly').on("click", function () {
@@ -47,37 +47,18 @@ $(document).ready(function () {
                 $('#ct-diaChi').html(data[0].diaChi);
                 $('#ct-date').html(data[0].created_on);
                 $('#ct-dienThoai').html(data[0].dienThoai);
-                
-                // $('#ct-trangthai').html(function () {
-                //     var status;
-                //     switch (data[0].status) {
-                //         case '0':
-                //             status = 'Chưa xử lý';
-                //             break;
-                //         case '1':
-                //             status = 'Đang xử lý';
-                //             break;
-                //         case '2':
-                //             status = 'Đã giao hàng';
-                //             break;
-                //         case '-1':
-                //             status = 'Hủy đơn';
-                //             break;
-                //     }
-                //     return status;
-                // });
                 $('#ct-trangthai').html(data[0].updated_on);
-                $('.radio-trangthai[value='+data[0].status+']').prop('checked', true);
-                
+                $('.radio-trangthai[value=' + data[0].status + ']').prop('checked', true);
+
                 //Tạo bảng chi tiết đơn hàng:
                 $.each(data, function (i, value) {
-                    row += '<tr><td>'+(i+1)+'</td>';
+                    row += '<tr><td>' + (i + 1) + '</td>';
                     row += '<td>' + value.tenSP + '</td>';
                     row += '<td>' + parseFloat(value.soluong).toLocaleString() + '</td>';
                     row += '<td>' + parseFloat(value.giaban).toLocaleString() + '</td>';
                     row += '<td>' + (parseFloat(value.soluong) * parseFloat(value.giaban)).toLocaleString() + '</td>'
                     total += (parseFloat(value.soluong) * parseFloat(value.giaban));
-                    
+
                 })
 
                 table.append(row);
@@ -86,4 +67,24 @@ $(document).ready(function () {
         );
 
     });
+
+    $('.chitietsp').on("click", function () {
+        var id = $(this).attr('data-id');
+        $.post(
+            "/shop/ajax/admin_hienThiSP", 
+            {
+                hienthiSP: id
+            },
+            function (json) {
+                var data = JSON.parse(json);
+                console.log(json);
+                console.log(data);
+                $('#update-name').val(data[0].tenSP);
+                $('#update-giaban').val(data[0].donGia);
+                $('#update-mota').val(data[0].motaSP);
+            },
+
+        );
+    });
+
 });

@@ -3,7 +3,7 @@ class productModel extends DB
 {
     public function danhSachSP()
     {
-        $sql = "SELECT * FROM sanpham";
+        $sql = "SELECT * FROM sanpham ORDER BY loaiID";
         $query = $this->con->query($sql);
         $table = $query->fetch_all(MYSQLI_ASSOC);
         return $table;
@@ -85,13 +85,20 @@ class productModel extends DB
         $_SESSION['total'] = 0;
     }
 
-    public function themSP($tenSP, $donGia, $donVi, $loai, $url, $img){
+    public function themSP($tenSP, $donGia, $donVi, $loai, $img, $moTa){
         $sql = "INSERT INTO sanpham 
-        SET tenSP = ?, url = ?, donGia = ?, donVi = ?, loaiID = ?, url = ?, img = ?
+        SET tenSP = ?, 
+        `url` = ?, loaiID = ?, donGia = ?, donVi = ?, motaSP = ?, img = ?
         ";
+        $url = $this->slug($tenSP);
         $stm = $this->con->prepare($sql);
-        $stm->bind_param("ssisiss",$tenSP, $donGia, $donVi, $loai, $url, $img);
-        $stm->execute();
+        $stm->bind_param("ssiisss", $tenSP, $url, $loai, $donGia, $donVi, $moTa, $img);
+        if($stm->execute()){
+            return true;
+        } else {
+            return false;
+        }
+        $stm->close();
 
     }
 }
