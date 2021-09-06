@@ -50,7 +50,7 @@ class admin extends controller
     {
         if (isset($_SESSION['admin'])) {
             $search = '';
-            if(isset($_POST['search-order'])){
+            if (isset($_POST['search-order'])) {
                 $search = $_POST['search-order'];
             }
             $this->view("admin", [
@@ -110,32 +110,33 @@ class admin extends controller
                 $donVi = $_POST['donVi'];
 
                 //Xử lý file ảnh upload:
-                $checkUpload =[];
+                $checkUpload = [];
                 $folder = './public/images/sanpham/';
                 $file = $_FILES['img'];
                 $findExt = explode('.', $file['name']);
                 $fileExt = strtolower(end($findExt));
                 $allowExt = ['jpg', 'png', 'gif'];
-                if($file['size']>5242880){
+                if ($file['size'] > 5242880) {
                     $checkUpload['size'] = 'File size must be less than 5MB!';
                 }
-                if(!in_array($fileExt, $allowExt)){
+                if (!in_array($fileExt, $allowExt)) {
                     $checkUpload['type'] = 'Invalid image format.';
                 }
-                if(count($checkUpload)!=0){
+                if (count($checkUpload) != 0) {
                     print_r($checkUpload);
                     exit();
                 } else {
-                    $fileName = uniqid().$file['name'];
-                    move_uploaded_file($file['tmp_name'], $folder.$fileName);
+                    $fileName = uniqid() . $file['name'];
+                    move_uploaded_file($file['tmp_name'], $folder . $fileName);
                     $img = $fileName;
                 }
-                
+
                 $result = $this->product->themSP($tenSP, $donGia, $donVi, $loaiSP, $img, $moTa);
-                if($result === false){
-                    echo "False"; exit;
+                if ($result === false) {
+                    echo "False";
+                    exit;
                 } else {
-                    header ("location: /shop/admin/product");
+                    header("location: /shop/admin/product");
                 }
             }
         } else {
@@ -143,8 +144,55 @@ class admin extends controller
         }
     }
 
-    public function admin_updateSP(){
-        
+    public function admin_updateSP()
+    {
+        if (isset($_SESSION['admin'])) {
+            if (isset($_POST['update'])) {
+                $id = $_POST['update-id'];
+                $tenSP = $_POST['update-name'];
+                $loai = $_POST['update-loai'];
+                $donGia = $_POST['update-giaban'];
+                $moTa = $_POST['update-mota'];
+                $img = 0;
+                echo $id . "<br>" . $tenSP ."<br>";
+                if ($_FILES['update-img']['name'] != '') {
+                    $checkUpload = [];
+                    $folder = './public/images/sanpham/';
+                    $SP = $this->product->chiTietSP($id);
+                    $oldImg = $folder . $SP->img;
+                    $file = $_FILES['update-img'];
+                    $findExt = explode('.', $file['name']);
+                    $fileExt = strtolower(end($findExt));
+                    $allowExt = ['jpg', 'png', 'gif'];
+                    if ($file['size'] > 5242880) {
+                        $checkUpload['size'] = 'File size must be less than 5MB!';
+                    }
+                    if (!in_array($fileExt, $allowExt)) {
+                        $checkUpload['type'] = 'Invalid image format.';
+                    }
+                    if (count($checkUpload) > 0) {
+                        $img = 0;
+                        echo "Image error";
+                        
+                    } else {
+                        $fileName = uniqid() . "-" . $file['name'];
+                        move_uploaded_file($file['tmp_name'], $folder . $fileName);
+                        $img = $fileName;
+                        if(file_exists($oldImg)){
+                            unlink($oldImg);
+                        };
+                    }
+                }
+                $result = $this->product->suaSP($id, $tenSP, $donGia, $loai, $moTa, $img);
+                if ($result === false) {
+                    echo "FALSE";
+                } else {
+                    echo "TRUE";
+                    header ("location: /shop/admin/product");
+                }
+            } else echo 'Không có thông tin';
+        } else {
+            header("location: /shop/admin/login");
+        }
     }
-
 }

@@ -24,7 +24,7 @@
                         <img style="width:100px" src="/shop/public/images/sanpham/<?= $sp['img'] ?>" alt="">
                         <p><?= $sp['tenSP'] ?></p>
                     </td>
-                    <td><?= $sp['donGia'] ?></td>
+                    <td><?= number_format($sp['donGia']) ?></td>
                     <td><?= $sp['daBan'] ?></td>
                     <td><?= $sp['tonKho'] ?></td>
                     <td><?= $sp['created_on']  ?></td>
@@ -102,22 +102,23 @@
 <!-- Quản lý sản phẩm -->
 <div class="modal fade" id="edit-sp" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <form action="/shop/admin/admin_updatesp" method="post">>
+        <form action="/shop/admin/admin_updatesp" method="post" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Quản lý sản phẩm</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" id='update-id' name="update-id" value=''>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="mb-3">
                                 <label for="update-name" class="form-label">Tên sản phẩm:</label>
-                                <input type="text" class="form-control" name="update-name" id="update-name" aria-describedby="help-update-name " placeholder="">
+                                <input type="text" class="form-control" name="update-name" id="update-name" aria-describedby="help-update-name " placeholder="" required>
                                 <small id="help-update-name" class="form-text text-muted"></small>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="mb-3">
                                 <label for="update-loai" class="form-label">Loại sản phẩm:</label>
                                 <select class="form-control" name="update-loai" id="update-loai">
@@ -128,25 +129,35 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="update-status" class="form-label">Trạng thái</label>
+                                <select class="form-control" name="update-status" id="update-status">
+                                    <option></option>
+                                    <option></option>
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
                                 <label for="update-giaban" class="form-label">Giá bán:</label>
-                                <input type="text" class="form-control" name="update-giaban" id="update-giaban" aria-describedby="help-update-giaban" placeholder="">
+                                <input type="number" class="form-control" name="update-giaban" id="update-giaban" aria-describedby="help-update-giaban" placeholder="" min='500' step="any" required>
                                 <small id="help-update-giaban" class="form-text text-muted"></small>
                             </div>
                         </div>
                         <div class="col-6">
                             <label for="" class="form-label">Ảnh đại diện:</label>
-                            <input type="file" class="form-control" name="img" id="img" placeholder="" aria-describedby="imgHelp" required accept=".jpg, .png, .gif">
+                            <input type="file" class="form-control" name="update-img" id="update-img" placeholder="" aria-describedby="imgHelp" accept=".jpg, .png, .gif">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="update-mota" class="form-label">Cập nhật mô tả:</label>
-                                <textarea class="form-control" name="update-mota" id="update-mota" rows="2"></textarea>
+                                <textarea class="form-control" name="update-mota" id="update-mota" rows="2" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -154,7 +165,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="submit" name='update' class="btn btn-primary">Save</button>
                 </div>
             </div>
         </form>

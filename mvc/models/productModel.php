@@ -97,8 +97,32 @@ class productModel extends DB
             return true;
         } else {
             return false;
-        }
+        } 
         $stm->close();
+    }
 
+    public function suaSP($id, $tenSP, $donGia, $loai, $moTa, $img){
+        $url = $this->slug($tenSP);
+        $SP = $this->chitietSP($id);
+        if ($loai == 0) {
+            $loai = $SP->loaiID;
+        }
+        if($img == 0){
+            $sql = "UPDATE sanpham SET tenSP = ?, donGia = ?, loaiID = ?, motaSP = ?, url = ?
+            WHERE id = ?";
+            $stm = $this->con->prepare($sql);
+            $stm->bind_param("siissi", $tenSP, $donGia, $loai, $moTa, $url, $id);
+            if($stm->execute()){
+                return true;
+            }else return false;
+        } else {
+            $sql = "UPDATE sanpham SET tenSP = ?, donGia = ?, loaiID = ?, motaSP = ?, url = ?, img = ? 
+            WHERE id = ?";
+            $stm = $this->con->prepare($sql);
+            $stm->bind_param("siisssi", $tenSP, $donGia, $loai, $moTa, $url, $img, $id);
+            if($stm->execute()){
+                return true;
+            }else return false;
+        }
     }
 }

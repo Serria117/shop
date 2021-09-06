@@ -79,6 +79,7 @@ $(document).ready(function () {
                 var data = JSON.parse(json);
                 console.log(json);
                 console.log(data);
+                $('#update-id').val(id);
                 $('#update-name').val(data[0].tenSP);
                 $('#update-giaban').val(data[0].donGia);
                 $('#update-mota').val(data[0].motaSP);
