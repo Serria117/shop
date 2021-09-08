@@ -56,7 +56,7 @@ $(document).ready(function () {
     //Không cho nhập số lượng <=0
     $(".soluong").on("blur", function () {
         if ($(this).val() <= 0 || $(this).val() == "") {
-            alert("Bạn phải nhập số lượng > 0!")
+            alert("Số lượng hàng phải lớn hơn 0!")
             $(this).val(1);
         }
     });
