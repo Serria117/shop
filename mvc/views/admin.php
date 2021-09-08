@@ -11,7 +11,7 @@
     <meta name="description"
         content="Xtreme Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Xtreme Admin Lite Template by WrapPixel</title>
+    <title><?= isset($data['title'])? $data['title'] : 'Admin' ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="canonical" href="https://www.wrappixel.com/templates/xtreme-admin-lite/" />
     <!-- Favicon icon -->
@@ -20,6 +20,7 @@
     <link href="/shop/public/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/shop/public/dist/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/shop/public/admin.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -164,7 +165,7 @@
                                         <a class="dropdown-item" href="javascript:void(0)"><i
                                                 class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
+                                        <a class="dropdown-item" href="/shop/login/logout"><i
                                                 class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
                                     </div>
                                 </div>
@@ -181,10 +182,10 @@
                                     class="hide-menu">Trang chủ</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="/shop/admin/product" aria-expanded="false"><i
-                                    class="mdi mdi-account-network"></i><span class="hide-menu">Sản phẩm</span></a></li>
+                                    class="mdi mdi-border-all"></i><span class="hide-menu">Sản phẩm</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="table-basic.html" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
-                                    class="hide-menu">Table</span></a></li>
+                                href="/shop/admin/user" aria-expanded="false"><i class="mdi mdi-account-network"></i><span
+                                    class="hide-menu">Người dùng</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="icon-material.html" aria-expanded="false"><i class="mdi mdi-face"></i><span
                                     class="hide-menu">Icon</span></a></li>
@@ -215,15 +216,15 @@
             <div class="page-breadcrumb">
                 <div class="row align-items-center">
                     <div class="col-5">
-                        <h4 class="page-title">Dashboard</h4>
-                        <div class="d-flex align-items-center">
+                        <h4 class="page-title"><?= isset($data['title'])? $data['title'] : 'Admin' ?></h4>
+                        <!-- <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Library</li>
                                 </ol>
                             </nav>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-7">
                         <!-- <div class="text-end upgrade-btn">
@@ -233,6 +234,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->

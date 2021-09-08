@@ -4,6 +4,7 @@ if (window.history.replaceState) {
 $(document).ready(function () {
 
     setStatusColor();
+    setItemStatus();
 
     function setStatusColor() {
         var button = document.querySelectorAll('.xuly');
@@ -77,15 +78,46 @@ $(document).ready(function () {
             },
             function (json) {
                 var data = JSON.parse(json);
-                console.log(json);
-                console.log(data);
+                var option;
+                // console.log(json);
+                // console.log(data[0].status);
+                var currentStatus = data[0].status;
+                var changeStatus;
+                switch(currentStatus){
+                    case '1': 
+                    changeStatus = '0'; currentText = 'Kinh doanh' ; changeText = 'Ngừng kinh doanh' ; break;
+                    case '0': changeStatus = '1'; currentText = 'Ngừng kinh doanh'; changeText = 'kinh doanh' ; break;
+                }
                 $('#update-id').val(id);
                 $('#update-name').val(data[0].tenSP);
                 $('#update-giaban').val(data[0].donGia);
                 $('#update-mota').val(data[0].motaSP);
+                $('#update-status option').remove();
+                $('#update-status').append(
+                    '<option value="'+currentStatus+'">'+currentText+'</option>'
+                    + '<option value="'+changeStatus+'">'+changeText+'</option>'
+                );
+                
             },
 
         );
     });
+
+    //Hiển thị trạng thái sản phẩm:
+    function setItemStatus(){
+        var spStatus = document.querySelectorAll(".sp-status");
+        $.each(spStatus, function () { 
+            var stt = $(this).attr('data-status');
+            switch (stt) {
+                case '0':
+                    $(this).toggleClass('sp-status-0');
+                break;
+                case '1':
+                    $(this).toggleClass('sp-status-1');
+                break;
+            }
+         })
+    }
+
 
 });

@@ -5,9 +5,9 @@
             <?php if (isset($data['mess'])) { ?>
                 <h5><?= $data['mess'] ?></h5>
                 <script>
-                setTimeout(function(){
-                    window.location.href = '../home';
-                 }, 7000);
+                    setTimeout(function() {
+                        window.location.href = '../home';
+                    }, 7000);
                 </script>
             <?php } else { ?>
                 <span>

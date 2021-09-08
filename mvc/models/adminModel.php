@@ -1,37 +1,7 @@
 <?php
 class adminModel extends DB
 {
-    public function login($name, $password)
-    {
-        $error = '';
-        $sql_name = "SELECT * FROM users WHERE userName = ?";
-        $stm = $this->con->prepare($sql_name);
-        $stm->bind_param("s", $name);
-        $stm->execute();
-        $result = $stm->get_result();
-        if ($result->num_rows === 1) {
-            $login = $result->fetch_assoc();
-            if (password_verify($password, $login['userPass'])) {
-                return $login;
-            } else {
-                return 0;
-            }
-        } else {
-            return 0;
-        }
-    }
-
-    public function danhsachSP()
-    {
-        $sql = "SELECT sp.id, sp.donGia, sp.tenSP, sp.img, sp.created_on, sp.updated_on, sp.tonKho,
-        SUM(soluong) as 'daBan' FROM donhangchitiet as dh
-        RIGHT JOIN sanpham as sp ON dh.sanphamID = sp.id 
-        GROUP BY sp.tenSP ORDER BY sp.created_on DESC";
-        $query = $this->con->query($sql);
-        $result = $query->fetch_all(MYSQLI_ASSOC);
-        return $result;
-    }
-
+    /* Quản lý đơn hàng */
     public function orderlist($search)
     {
         $search = $this->con->real_escape_string($search);
@@ -66,6 +36,17 @@ class adminModel extends DB
         $this->con->query($sql);
     }
 
+    /* Quản lý sản phẩm */
+    public function danhsachSP()
+    {
+        $sql = "SELECT sp.id, sp.donGia, sp.tenSP, sp.img, sp.created_on, sp.updated_on, sp.tonKho, sp.status,
+        SUM(soluong) as 'daBan' FROM donhangchitiet as dh
+        RIGHT JOIN sanpham as sp ON dh.sanphamID = sp.id 
+        GROUP BY sp.tenSP ORDER BY sp.created_on DESC";
+        $query = $this->con->query($sql);
+        $result = $query->fetch_all(MYSQLI_ASSOC);
+        return $result;
+    }
     public function updateProduct($id, $tenSP, $loaiID, $donGia, $moTa, $img)
     {
         $sql1 = "UPDATE sanpham SET 
@@ -96,5 +77,34 @@ class adminModel extends DB
         $result = $query->fetch_all(MYSQLI_ASSOC);
         $json = json_encode($result);
         return $json;
+    }
+
+    /* Quản lý nhân viên */
+    public function login($name, $password)
+    {
+        $error = '';
+        $sql_name = "SELECT * FROM users WHERE userName = ?";
+        $stm = $this->con->prepare($sql_name);
+        $stm->bind_param("s", $name);
+        $stm->execute();
+        $result = $stm->get_result();
+        if ($result->num_rows === 1) {
+            $login = $result->fetch_assoc();
+            if (password_verify($password, $login['userPass'])) {
+                return $login;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
+    }
+    public function themNhanNien($username, $password, $email){
+        $sql = "INSERT INTO users SET userName = ?, userPass = ?, userEmail = ?";
+        $stm = $this->con->prepare($sql);
+        $stm->bind_param("sss", $username, password_hash($password, PASSWORD_DEFAULT), $email);
+        if($stm->execute()){
+            return true;
+        } else return false;
     }
 }

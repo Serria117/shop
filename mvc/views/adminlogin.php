@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         .container {
-            width: 50%;
+            width: 500px;
             margin-top: 10%;
             border: 1px solid #dbdbdb;
             background-color: #dbdbdb;
@@ -22,7 +22,7 @@
 
         .warper {
             margin: 0 auto;
-            max-width: 90%;
+            max-width: 70%;
         }
 
         h2 {
@@ -51,7 +51,7 @@
     <div class="container">
         <div class="warper">
             <h2>Trang quản trị</h2>
-            <form action="/shop/admin/login" method="post">
+            <form action="/shop/login" method="post">
                 <div class="mb-3">
                     <label for="" class="form-label">Tên đăng nhập:</label>
                     <input type="text" class="form-control" name="name" id="" aria-describedby="helpId" placeholder="" required>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="" class="form-label">Mật khẩu:</label>
-                    <input type="text" class="form-control" name="password" id="" aria-describedby="helpId" placeholder="" required>
+                    <input type="password" class="form-control" name="password" id="" aria-describedby="helpId" placeholder="" required>
                     <small id="helpPass" class="form-text text-muted"></small>
                 </div>
                 <div class="mb-3 submit">

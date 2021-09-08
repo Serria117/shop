@@ -3,7 +3,7 @@ class productModel extends DB
 {
     public function danhSachSP()
     {
-        $sql = "SELECT * FROM sanpham ORDER BY loaiID";
+        $sql = "SELECT * FROM sanpham WHERE status = 1 ORDER BY loaiID";
         $query = $this->con->query($sql);
         $table = $query->fetch_all(MYSQLI_ASSOC);
         return $table;
@@ -101,25 +101,25 @@ class productModel extends DB
         $stm->close();
     }
 
-    public function suaSP($id, $tenSP, $donGia, $loai, $moTa, $img){
+    public function suaSP($id, $tenSP, $donGia, $loai, $moTa, $img, $status){
         $url = $this->slug($tenSP);
         $SP = $this->chitietSP($id);
         if ($loai == 0) {
             $loai = $SP->loaiID;
         }
         if($img == 0){
-            $sql = "UPDATE sanpham SET tenSP = ?, donGia = ?, loaiID = ?, motaSP = ?, url = ?
+            $sql = "UPDATE sanpham SET tenSP = ?, donGia = ?, loaiID = ?, motaSP = ?, url = ?, status = ? 
             WHERE id = ?";
             $stm = $this->con->prepare($sql);
-            $stm->bind_param("siissi", $tenSP, $donGia, $loai, $moTa, $url, $id);
+            $stm->bind_param("siissii", $tenSP, $donGia, $loai, $moTa, $url, $status, $id);
             if($stm->execute()){
                 return true;
             }else return false;
         } else {
-            $sql = "UPDATE sanpham SET tenSP = ?, donGia = ?, loaiID = ?, motaSP = ?, url = ?, img = ? 
+            $sql = "UPDATE sanpham SET tenSP = ?, donGia = ?, loaiID = ?, motaSP = ?, url = ?, img = ?, status = ? 
             WHERE id = ?";
             $stm = $this->con->prepare($sql);
-            $stm->bind_param("siisssi", $tenSP, $donGia, $loai, $moTa, $url, $img, $id);
+            $stm->bind_param("siisssii", $tenSP, $donGia, $loai, $moTa, $url, $img, $status, $id);
             if($stm->execute()){
                 return true;
             }else return false;

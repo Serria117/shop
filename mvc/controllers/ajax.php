@@ -33,7 +33,7 @@ class ajax extends controller
             $total += $item['subtotal'];
         }
         $_SESSION['total'] = $total;
-        print_r($_SESSION['cart']);
+        echo $total;
     }
 
     public function updateCart()
@@ -77,5 +77,9 @@ class ajax extends controller
             $json = $this->admin->chiTietSP($id);
             echo $json;
         }
+    }
+
+    public function kiemTraNhanVien(){
+        
     }
 }

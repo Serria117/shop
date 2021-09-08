@@ -17,12 +17,19 @@
             <?php
             $stt = 1;
             foreach ($data['table'] as $sp) :
+                switch($sp['status']){
+                    case '1': $status = 'Đang kinh doanh'; break;
+                    case '0': $status = 'Ngừng kinh doanh'; break;
+                }
             ?>
                 <tr class='chitietsp' data-bs-toggle="modal" data-bs-target="#edit-sp" data-id="<?= $sp['id'] ?>">
                     <td scope="row"><?= $stt ?></td>
-                    <td>
+                    <td style="text-align: center;">
                         <img style="width:100px" src="/shop/public/images/sanpham/<?= $sp['img'] ?>" alt="">
-                        <p><?= $sp['tenSP'] ?></p>
+                        <p><b><?= $sp['tenSP'] ?></b></p>
+                        <p class='sp-status' data-status='<?= $sp['status'] ?>'>
+                            <?=$status?>
+                        </p>
                     </td>
                     <td><?= number_format($sp['donGia']) ?></td>
                     <td><?= $sp['daBan'] ?></td>
@@ -133,9 +140,7 @@
                             <div class="mb-3">
                                 <label for="update-status" class="form-label">Trạng thái</label>
                                 <select class="form-control" name="update-status" id="update-status">
-                                    <option></option>
-                                    <option></option>
-                                    <option></option>
+                                    
                                 </select>
                             </div>
                         </div>

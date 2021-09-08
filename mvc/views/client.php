@@ -13,8 +13,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="/shop/public/nicepage.css" media="screen">
   <link rel="stylesheet" href="/shop/public/Home.css" media="screen">
+ 
   <!-- <link rel="stylesheet" href="/shop/public/Product.css" media="screen"> -->
-  <script class="u-script" type="text/javascript" src="/shop/public/jquery-1.9.1.min.js" defer=""></script>
+  <!-- <script class="u-script" type="text/javascript" src="/shop/public/jquery-1.9.1.min.js" defer=""></script> -->
   <script class="u-script" type="text/javascript" src="/shop/public/nicepage.js" defer=""></script>
   <script class="u-script" type="text/javascript" src="/shop/public/main.js" defer=""></script>
   <meta name="generator" content="Nicepage 3.23.9, nicepage.com">
